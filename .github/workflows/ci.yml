@@ -31,7 +31,10 @@ on:
                 default: ""
             unit_test_command:
                 type: string
-                default: ""    
+                default: ""   
+            unit_test_before_command:
+                type: string
+                default: ""     
 
 jobs:
 
@@ -375,6 +378,7 @@ jobs:
                     ${{ runner.os }}-pnpm-        
               - name: Install dependencies
                 run: |
+                  ${{ inputs.unit_test_before_command }} 
                   ${{ inputs.package_manager }} install
                 env:
                   NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
