@@ -388,7 +388,7 @@ jobs:
               - name: Jest Coverage Comment
                 id: coverageComment
                 uses: MishaKav/jest-coverage-comment@b3268855834f7013ffb51ee780165ec7c0d5ec28
-                if: failure()
+                if: always()
                 with:
                     coverage-summary-path: ./coverage/coverage-summary.json
                     title: Coverage Summary
