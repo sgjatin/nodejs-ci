@@ -384,7 +384,26 @@ jobs:
                   NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               - name: Unit test
                 run: |
-                  ${{ inputs.unit_test_command }}             
+                  ${{ inputs.unit_test_command }} 
+              - name: Jest Coverage Comment
+                id: coverageComment
+                uses: MishaKav/jest-coverage-comment@b3268855834f7013ffb51ee780165ec7c0d5ec28
+                if: failure()
+                with:
+                    coverage-summary-path: ./coverage/coverage-summary.json
+                    title: Coverage Summary
+                    badge-title: Coverage
+                    hide-comment: false
+                    create-new-comment: false
+                    hide-summary: false
+                    unitxml-title: Junit Summary
+                    junitxml-path: ./coverage/report.xml
+                    coverage-title: Code coverage Report
+                    coverage-path: coverage.txt   
+                  
+
+
+
 
     docker:
         name: Docker build check
