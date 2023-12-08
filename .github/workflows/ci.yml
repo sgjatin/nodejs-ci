@@ -373,6 +373,8 @@ jobs:
                   key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
                   restore-keys: |
                     ${{ runner.os }}-pnpm-
+              - name: setup cypress environment
+                uses: cypress-io/github-action@v6          
               - name: Install dependencies
                 run: |
                   ${{ inputs.package_manager }} install
