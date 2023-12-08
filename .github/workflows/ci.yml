@@ -46,6 +46,8 @@ jobs:
               uses: actions/checkout@v3
               with:
                 ref: ${{ github.REF }}
+            - name: setup cypress environment
+              uses: cypress-io/github-action@v6     
             - name: Install dependencies
               run: |
                 ${{ inputs.package_manager }} install
@@ -372,9 +374,7 @@ jobs:
                   path: /__w/.pnpm-store
                   key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
                   restore-keys: |
-                    ${{ runner.os }}-pnpm-
-              - name: setup cypress environment
-                uses: cypress-io/github-action@v6          
+                    ${{ runner.os }}-pnpm-         
               - name: Install dependencies
                 run: |
                   ${{ inputs.package_manager }} install
