@@ -45,9 +45,7 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
               with:
-                ref: ${{ github.REF }}
-            - name: setup cypress environment
-              uses: cypress-io/github-action@v6     
+                ref: ${{ github.REF }}    
             - name: Install dependencies
               run: |
                 ${{ inputs.package_manager }} install
@@ -345,7 +343,7 @@ jobs:
           permissions: write-all
           needs: caching
           container:
-              image: public.ecr.aws/u6u3h0g1/docker-nodejs-ci:2.2
+              image: cypress/base:latest
           steps:
               - name: Checkout
                 uses: actions/checkout@v3
@@ -374,13 +372,13 @@ jobs:
                   path: /__w/.pnpm-store
                   key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
                   restore-keys: |
-                    ${{ runner.os }}-pnpm-         
+                    ${{ runner.os }}-pnpm-        
               - name: Install dependencies
                 run: |
                   ${{ inputs.package_manager }} install
                 env:
                   NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              - name: Build project
+              - name: Unit test
                 run: |
                   ${{ inputs.unit_test_command }}             
 
