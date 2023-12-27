@@ -268,7 +268,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: lockFile
-          path: .
+          # path: .
       - name: generate sbom
         run: |
           cdxgen --no-recurse -o bom.xml -p
