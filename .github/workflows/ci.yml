@@ -251,10 +251,7 @@ jobs:
     permissions: write-all
     needs: caching
     container:
-      image: public.ecr.aws/studiographene/ci:node-20-alpine 
-    defaults:
-        run:
-          working-directory: ${{ inputs.working_directory }}        
+      image: public.ecr.aws/studiographene/ci:node-20-alpine        
 
     steps:
       - name: Checkout
@@ -269,7 +266,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: lockFile
-          path: .
+          path: ${{ inputs.working_directory }}
       - name: generate sbom
         run: |
           cdxgen --no-recurse -o bom.xml -p
